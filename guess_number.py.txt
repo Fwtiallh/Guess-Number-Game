@@ -1,0 +1,86 @@
+import random
+
+print("===== بازی حدس اعداد =====")
+
+while True:
+
+    number = random.randint(1, 100)
+    attempts = 0
+    max_attempts = 5
+
+    print("\nیک عدد بین 1 تا 100 انتخاب شده است.")
+    print("شما 5 فرصت برای حدس زدن دارید.")
+
+    while attempts < max_attempts:
+
+        print("\nتلاش", attempts + 1, "از 5")
+        print("جان باقی مانده:", max_attempts - attempts)
+
+        try:
+            guess = int(input("حدس خود را وارد کنید: "))
+
+        except ValueError:
+            print("خطا! لطفاً فقط عدد وارد کنید.")
+            continue
+
+        if guess < 1 or guess > 100:
+            print("عدد باید بین 1 تا 100 باشد.")
+            continue
+
+        attempts += 1
+
+        if guess == number:
+            print("\nآفرین! شما برنده شدید.")
+
+            if attempts == 1:
+                print("رتبه شما: نمونه ای")
+
+            elif attempts == 2:
+                print("رتبه شما: بسیار خوبی")
+
+            elif attempts == 3:
+                print("رتبه شما: خوب")
+
+            elif attempts == 4:
+                print("رتبه شما: قبول")
+
+            elif attempts == 5:
+                print("رتبه شما: با شانس بردی!")
+
+            break
+
+        elif guess < number:
+            print("عدد مخفی بزرگ تر است.")
+
+        else:
+            print("عدد مخفی کوچک تر است.")
+
+        difference = abs(number - guess)
+
+        if difference <= 5:
+            print("خیلی نزدیکی!")
+
+        elif difference <= 15:
+            print("نزدیکی، ولی هنوز فاصله داری!")
+
+        else:
+            print("خیلی دوری!")
+
+        print("فرصت باقی مانده:", max_attempts - attempts)
+
+    if attempts == max_attempts and guess != number:
+        print("\nمتأسفانه باختی!")
+        print("عدد مخفی برابر بود با:", number)
+
+    while True:
+        again = input("\nآیا می خواهی دوباره بازی کنی؟ (بله/خیر): ")
+
+        if again == "بله":
+            break
+
+        elif again == "خیر":
+            print("ممنون از بازی شما!")
+            exit()
+
+        else:
+            print("لطفاً فقط بله یا خیر وارد کنید.")
